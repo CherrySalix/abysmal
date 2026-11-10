@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import Services from './components/Services'
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <section id="servicios" className="min-h-screen bg-abyss-800" />
+        <Services />
         <section id="sobre-nosotros" className="min-h-screen" />
         <section id="galeria" className="min-h-screen bg-abyss-800" />
         <section id="contacto" className="min-h-screen" />
