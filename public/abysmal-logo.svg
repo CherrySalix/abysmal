@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Kraken silhouette placeholder -->
+  <circle cx="50" cy="40" r="20" fill="#5fe3b2"/>
+  <path d="M30 60 Q35 80 30 95M40 65 Q42 85 38 98M50 68 Q50 88 50 100M60 65 Q58 85 62 98M70 60 Q65 80 70 95" stroke="#5fe3b2" stroke-width="4" stroke-linecap="round"/>
+  <path d="M38 32 Q50 20 62 32" stroke="#0b1418" stroke-width="3" fill="none"/>
+  <circle cx="43" cy="38" r="4" fill="#0b1418"/>
+  <circle cx="57" cy="38" r="4" fill="#0b1418"/>
+  <path d="M35 48 Q50 56 65 48" stroke="#0b1418" stroke-width="2" fill="none"/>
+  <!-- Trident crown -->
+  <path d="M44 18 L44 10 M50 16 L50 6 M56 18 L56 10" stroke="#5fe3b2" stroke-width="3" stroke-linecap="round"/>
+  <path d="M42 12 L58 12" stroke="#5fe3b2" stroke-width="2"/>
+</svg>
