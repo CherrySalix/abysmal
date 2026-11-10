@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import Services from './components/Services'
 import About from './components/About'
 import Gallery from './components/Gallery'
+import Contact from './components/Contact'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Services />
         <About />
         <Gallery />
-        <section id="contacto" className="min-h-screen" />
+        <Contact />
       </main>
     </div>
   )
