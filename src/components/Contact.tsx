@@ -12,7 +12,7 @@ export default function Contact() {
   const shouldReduce = useReducedMotion()
 
   return (
-    <section id="contacto" className="py-24 bg-abyss-900 relative">
+    <section id="contacto" className="py-24 bg-abyss-900 relative scroll-mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="section-heading">CONTACTO Y UBICACIÓN</h2>
         <div className="section-underline" />
@@ -27,7 +27,10 @@ export default function Contact() {
             className="flex flex-col gap-8"
           >
             <div>
-              <span className="font-script text-coral-500 text-xl">¿Tienes dudas o quieres apartar mesa?</span>
+              <span className="font-accent font-bold tracking-widest uppercase text-coral-500 text-sm flex items-center gap-2">
+                <span className="w-6 h-0.5 bg-coral-500" />
+                ¿Tienes dudas o quieres apartar mesa?
+              </span>
               <h3 className="font-display text-4xl text-cream-100 mt-1">VEN A JUGAR AL ABISMO</h3>
               <p className="text-cream-100/70 text-sm sm:text-base mt-2">
                 No necesitas experiencia ni traer tus propios juegos. Nuestro staff te explica las reglas y te recomienda el título perfecto para tu grupo.

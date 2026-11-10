@@ -17,7 +17,7 @@ export default {
       },
       fontFamily: {
         display: ['"Bebas Neue"', 'sans-serif'],
-        script:  ['"Dancing Script"', 'cursive'],
+        accent:  ['Outfit', 'sans-serif'],
         sans:    ['Inter', 'ui-sans-serif', 'system-ui'],
       },
       backgroundImage: {

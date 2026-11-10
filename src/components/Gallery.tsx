@@ -50,7 +50,7 @@ export default function Gallery() {
   const shouldReduce = useReducedMotion()
 
   return (
-    <section id="galeria" className="py-24 bg-abyss-800 relative">
+    <section id="galeria" className="py-24 bg-abyss-800 relative scroll-mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="section-heading">GALERÍA DEL ABISMO</h2>
         <div className="section-underline" />
@@ -77,7 +77,7 @@ export default function Gallery() {
 
               {/* Hover overlay with details */}
               <div className="absolute inset-0 bg-gradient-to-t from-abyss-900/90 via-abyss-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                <span className="text-coral-500 font-script text-base">{item.category}</span>
+                <span className="text-coral-500 font-accent font-bold tracking-widest uppercase text-xs">{item.category}</span>
                 <h3 className="text-cream-100 font-display text-2xl tracking-wide">{item.title}</h3>
               </div>
             </motion.div>

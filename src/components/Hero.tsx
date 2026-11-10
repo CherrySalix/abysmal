@@ -49,9 +49,11 @@ export default function Hero() {
       >
         <motion.p
           variants={itemVariants}
-          className="font-script text-coral-500 text-xl sm:text-2xl mb-3"
+          className="font-accent font-bold tracking-[0.25em] uppercase text-coral-500 text-sm sm:text-base mb-3 flex items-center gap-2"
         >
+          <span className="w-8 h-0.5 bg-coral-500" />
           Games &amp; Food
+          <span className="w-8 h-0.5 bg-coral-500" />
         </motion.p>
 
         <motion.h1

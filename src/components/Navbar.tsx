@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ArrowRight } from 'lucide-react'
 import { NAV_LINKS } from '../tokens'
 import { useScrollSpy } from '../hooks/useScrollSpy'
 
@@ -11,13 +11,19 @@ export default function Navbar() {
 
   // Close on outside click
   useEffect(() => {
-    function handleOutside(e: MouseEvent) {
+    function handleOutside(e: MouseEvent | TouchEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setIsOpen(false)
       }
     }
-    if (isOpen) document.addEventListener('mousedown', handleOutside)
-    return () => document.removeEventListener('mousedown', handleOutside)
+    if (isOpen) {
+      document.addEventListener('mousedown', handleOutside)
+      document.addEventListener('touchstart', handleOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutside)
+      document.removeEventListener('touchstart', handleOutside)
+    }
   }, [isOpen])
 
   // Close on resize to desktop
@@ -31,40 +37,54 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    // Small timeout to allow the mobile drawer to start closing smoothly
+    setTimeout(() => {
+      const targetId = href.replace('#', '')
+      const el = document.getElementById(targetId)
+      if (el) {
+        const yOffset = -70 // Navbar height offset
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
+        window.scrollTo({ top: y, behavior: 'smooth' })
+      }
+    }, 50)
   }
 
   return (
     <nav
       ref={navRef}
-      className="navbar-root fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-surface/80 border-b border-abyss-700"
+      className="navbar-root fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-abyss-900/90 border-b border-abyss-700/80 transition-colors"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a
             href="#inicio"
-            onClick={(e) => { e.preventDefault(); handleNavClick('#inicio') }}
-            className="flex items-center gap-2 group"
-            aria-label="Abysmal – inicio"
+            onClick={(e) => {
+              e.preventDefault()
+              handleNavClick('#inicio')
+            }}
+            className="flex items-center gap-2.5 group cursor-pointer"
+            aria-label="Abysmal – volver al inicio"
           >
-            <img src="/abysmal-logo.svg" alt="" className="h-8 w-8" />
-            <span className="font-display text-2xl text-mint-400 group-hover:text-mint-400/80 transition-colors">
+            <img src="/abysmal-logo.svg" alt="" className="h-8 w-8 transition-transform group-hover:scale-105" />
+            <span className="font-display text-2xl text-mint-400 tracking-wider group-hover:text-mint-400/90 transition-colors">
               ABYSMAL
             </span>
           </a>
 
-          {/* Desktop links */}
+          {/* Desktop navigation links */}
           <div className="hidden md:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
-                className={`font-sans text-sm font-medium transition-colors ${
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleNavClick(link.href)
+                }}
+                className={`font-sans text-sm font-medium transition-colors cursor-pointer ${
                   activeSection === link.href
-                    ? 'text-mint-400'
+                    ? 'text-mint-400 font-semibold'
                     : 'text-cream-100/70 hover:text-cream-100'
                 }`}
               >
@@ -73,58 +93,64 @@ export default function Navbar() {
             ))}
             <a
               href="#contacto"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#contacto') }}
-              className="bg-mint-400 text-abyss-900 font-sans font-semibold text-sm px-4 py-2 rounded-full hover:bg-mint-400/90 transition-colors"
+              onClick={(e) => {
+                e.preventDefault()
+                handleNavClick('#contacto')
+              }}
+              className="bg-mint-400 text-abyss-900 font-sans font-semibold text-sm px-5 py-2 rounded-full hover:bg-mint-400/90 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md shadow-mint-400/10"
             >
               Visítanos
             </a>
           </div>
 
-          {/* Hamburger */}
+          {/* Mobile hamburger button */}
           <button
-            className="md:hidden text-cream-100 p-2 rounded-lg hover:bg-abyss-700 transition-colors"
-            onClick={() => setIsOpen((o) => !o)}
+            type="button"
+            className="md:hidden text-cream-100 p-2.5 rounded-xl bg-abyss-800/80 border border-abyss-700 hover:bg-abyss-700 focus:outline-none focus:ring-2 focus:ring-mint-400/50 transition-colors active:scale-95"
+            onClick={() => setIsOpen((prev) => !prev)}
             aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isOpen}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={22} className="text-mint-400" /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile expandable drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            key="mobile-menu"
+            key="mobile-drawer"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="overflow-hidden md:hidden bg-abyss-800/95 backdrop-blur-md border-t border-abyss-700"
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="overflow-hidden md:hidden bg-abyss-900/98 backdrop-blur-xl border-t border-abyss-700 shadow-2xl"
           >
-            <div className="px-4 py-4 flex flex-col gap-2">
+            <div className="px-4 py-5 flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
-                <a
+                <button
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
-                  className={`font-sans text-base py-3 px-4 rounded-xl transition-colors ${
+                  type="button"
+                  onClick={() => handleNavClick(link.href)}
+                  className={`w-full text-left font-sans text-base py-3.5 px-4 rounded-xl flex items-center justify-between transition-colors cursor-pointer ${
                     activeSection === link.href
-                      ? 'text-mint-400 bg-abyss-700'
-                      : 'text-cream-100/80 hover:text-cream-100 hover:bg-abyss-700'
+                      ? 'text-mint-400 bg-abyss-800 font-semibold border-l-4 border-mint-400'
+                      : 'text-cream-100/80 hover:text-cream-100 hover:bg-abyss-800/60 active:bg-abyss-800'
                   }`}
                 >
-                  {link.label}
-                </a>
+                  <span>{link.label}</span>
+                  <ArrowRight size={16} className="text-cream-100/40" />
+                </button>
               ))}
-              <a
-                href="#contacto"
-                onClick={(e) => { e.preventDefault(); handleNavClick('#contacto') }}
-                className="mt-2 bg-mint-400 text-abyss-900 font-sans font-semibold text-center py-3 rounded-full hover:bg-mint-400/90 transition-colors"
+
+              <button
+                type="button"
+                onClick={() => handleNavClick('#contacto')}
+                className="mt-3 w-full bg-mint-400 text-abyss-900 font-sans font-semibold text-center py-3.5 rounded-full hover:bg-mint-400/90 transition-all active:scale-98 shadow-lg shadow-mint-400/20"
               >
-                Visítanos
-              </a>
+                Visítanos en Justo Sierra
+              </button>
             </div>
           </motion.div>
         )}
