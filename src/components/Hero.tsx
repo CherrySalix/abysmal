@@ -91,10 +91,6 @@ export default function Hero() {
           </a>
           <a
             href="#servicios"
-            onClick={(e) => {
-              e.preventDefault()
-              document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })
-            }}
             className="border border-coral-500 text-coral-500 font-sans font-semibold px-8 py-3.5 rounded-full hover:bg-coral-500/10 transition-all hover:scale-105 active:scale-95 text-center"
           >
             Ver servicios

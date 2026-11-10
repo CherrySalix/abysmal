@@ -23,10 +23,6 @@
     z-index: 1;
   }
 
-  .glass {
-    @apply backdrop-blur-md bg-surface/70 border-b border-abyss-700;
-  }
-
   .section-heading {
     @apply font-display text-5xl md:text-6xl text-cream-100 text-center;
   }

@@ -59,10 +59,6 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="#inicio"
-            onClick={(e) => {
-              e.preventDefault()
-              handleNavClick('#inicio')
-            }}
             className="flex items-center gap-2.5 group cursor-pointer"
             aria-label="Abysmal – volver al inicio"
           >
@@ -78,10 +74,6 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavClick(link.href)
-                }}
                 className={`font-sans text-sm font-medium transition-colors cursor-pointer ${
                   activeSection === link.href
                     ? 'text-mint-400 font-semibold'
@@ -93,10 +85,6 @@ export default function Navbar() {
             ))}
             <a
               href="#contacto"
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavClick('#contacto')
-              }}
               className="bg-mint-400 text-abyss-900 font-sans font-semibold text-sm px-5 py-2 rounded-full hover:bg-mint-400/90 transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md shadow-mint-400/10"
             >
               Visítanos
