@@ -75,10 +75,10 @@ export default function Gallery() {
                 loading="lazy"
               />
 
-              {/* Hover overlay with details */}
-              <div className="absolute inset-0 bg-gradient-to-t from-abyss-900/90 via-abyss-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+              {/* Caption: always visible on touchscreens, hover on desktop */}
+              <div className="absolute inset-0 bg-gradient-to-t from-abyss-900/95 via-abyss-900/30 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5">
                 <span className="text-coral-500 font-accent font-bold tracking-widest uppercase text-xs">{item.category}</span>
-                <h3 className="text-cream-100 font-display text-2xl tracking-wide">{item.title}</h3>
+                <h3 className="text-cream-100 font-display text-xl sm:text-2xl tracking-wide">{item.title}</h3>
               </div>
             </motion.div>
           ))}

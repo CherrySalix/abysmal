@@ -7,7 +7,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-abyss-900 border-t border-abyss-700/80 py-12 relative z-10">
+    <footer className="bg-abyss-900 border-t border-abyss-700/80 pt-12 pb-24 sm:pb-12 relative z-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Tagline */}
@@ -24,32 +24,32 @@ export default function Footer() {
             © {new Date().getFullYear()} Abysmal Games and Food. Todos los derechos reservados.
           </p>
 
-          {/* Socials & Back to Top */}
-          <div className="flex items-center gap-4 order-2 md:order-3">
+          {/* Socials & Back to Top with 44px touch targets */}
+          <div className="flex items-center gap-2 order-2 md:order-3">
             <a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream-100/60 hover:text-coral-500 transition-colors"
-              aria-label="Instagram"
+              className="w-11 h-11 rounded-full flex items-center justify-center text-cream-100/60 hover:text-coral-500 hover:bg-abyss-800 transition-colors"
+              aria-label="Instagram de Abysmal"
             >
-              <Instagram size={18} />
+              <Instagram size={20} />
             </a>
             <a
               href={FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cream-100/60 hover:text-mint-400 transition-colors"
-              aria-label="Facebook"
+              className="w-11 h-11 rounded-full flex items-center justify-center text-cream-100/60 hover:text-mint-400 hover:bg-abyss-800 transition-colors"
+              aria-label="Facebook de Abysmal"
             >
-              <Facebook size={18} />
+              <Facebook size={20} />
             </a>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-full bg-abyss-800 border border-abyss-700 text-cream-100/60 hover:text-cream-100 hover:bg-abyss-700 transition-colors"
+              className="w-11 h-11 rounded-full bg-abyss-800 border border-abyss-700 flex items-center justify-center text-cream-100/60 hover:text-cream-100 hover:bg-abyss-700 transition-colors"
               aria-label="Volver arriba"
             >
-              <ArrowUp size={16} />
+              <ArrowUp size={18} />
             </button>
           </div>
         </div>

@@ -9,20 +9,25 @@ export default function Navbar() {
   const activeSection = useScrollSpy()
   const navRef = useRef<HTMLElement>(null)
 
-  // Close on outside click
+  // Close on outside click or Escape key
   useEffect(() => {
     function handleOutside(e: MouseEvent | TouchEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setIsOpen(false)
       }
     }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
     if (isOpen) {
       document.addEventListener('mousedown', handleOutside)
       document.addEventListener('touchstart', handleOutside)
+      document.addEventListener('keydown', handleKeyDown)
     }
     return () => {
       document.removeEventListener('mousedown', handleOutside)
       document.removeEventListener('touchstart', handleOutside)
+      document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen])
 
@@ -37,16 +42,13 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false)
-    // Small timeout to allow the mobile drawer to start closing smoothly
-    setTimeout(() => {
-      const targetId = href.replace('#', '')
-      const el = document.getElementById(targetId)
-      if (el) {
-        const yOffset = -70 // Navbar height offset
-        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
-        window.scrollTo({ top: y, behavior: 'smooth' })
-      }
-    }, 50)
+    const targetId = href.replace('#', '')
+    const el = document.getElementById(targetId)
+    if (el) {
+      const yOffset = -70 // Navbar height offset
+      const y = el.getBoundingClientRect().top + window.scrollY + yOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
+    }
   }
 
   return (
@@ -98,6 +100,7 @@ export default function Navbar() {
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isOpen}
+            aria-controls="mobile-nav-drawer"
           >
             {isOpen ? <X size={22} className="text-mint-400" /> : <Menu size={22} />}
           </button>
@@ -109,6 +112,7 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             key="mobile-drawer"
+            id="mobile-nav-drawer"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}

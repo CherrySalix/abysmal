@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Clock, ShoppingBag, Calendar, Swords, Sparkles, Flame, Shield, CheckCircle2 } from 'lucide-react'
+import { Clock, ShoppingBag, Calendar, Swords, Sparkles, CheckCircle2 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 interface ServiceItem {

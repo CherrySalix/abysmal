@@ -58,7 +58,7 @@ export default function Hero() {
 
         <motion.h1
           variants={itemVariants}
-          className="font-display text-8xl sm:text-[10rem] lg:text-[12rem] text-cream-100 leading-none tracking-tight"
+          className="font-display text-7xl sm:text-[10rem] lg:text-[12rem] text-cream-100 leading-none tracking-tight"
         >
           ABYSMAL
         </motion.h1>
