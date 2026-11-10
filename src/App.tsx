@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import About from './components/About'
+import Gallery from './components/Gallery'
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <Hero />
         <Services />
         <About />
-        <section id="galeria" className="min-h-screen bg-abyss-800" />
+        <Gallery />
         <section id="contacto" className="min-h-screen" />
       </main>
     </div>
